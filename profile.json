@@ -1,7 +1,7 @@
 {
     "name": "Abhishek Singh",
     "role": "Art & Craft YouTuber",
-    "image": "https://i.imgur.com/Nz9ZLAj.png",
+    "image": "photo.jpg",
     "contacts": [
       { "icon": "fas fa-envelope", "label": "abhi@example.com" },
       { "icon": "fab fa-youtube", "label": "@ArtWithAbhishek" },
