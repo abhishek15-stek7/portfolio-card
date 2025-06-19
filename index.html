@@ -18,8 +18,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000;
+      background: linear-gradient(135deg, #1e1e2f, #2c2c54, #3a3a85, #1f4068);
+      background-size: 400% 400%;
+      animation: bgMove 15s ease infinite;
       color: white;
+    }
+
+    @keyframes bgMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     canvas#bgCanvas {
@@ -82,7 +90,7 @@
       height: 146px;
       border-radius: 50%;
       background: conic-gradient(from 0deg, #00feba, #5b548a, #00feba);
-      animation: rotateHalo 5s linear infinite;
+      animation: rotateHalo 4s linear infinite;
       z-index: 0;
     }
 
@@ -114,7 +122,7 @@
       background: #fff;
       color: #222;
       transform: rotateY(180deg);
-      justify-content: space-between;
+      justify-content: space-evenly;
     }
 
     .back h3 {
@@ -149,6 +157,22 @@
     .social-icons a:hover {
       transform: scale(1.2);
     }
+
+    .download-btn {
+      margin-top: 10px;
+      background: #5b548a;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .download-btn:hover {
+      background: #443c7d;
+    }
   </style>
 </head>
 <body>
@@ -168,23 +192,24 @@
       <h3>Connect With Me</h3>
       <ul id="contact-list"></ul>
       <div class="social-icons" id="social-icons"></div>
+      <a class="download-btn" href="photo.jpg" download>Download Image</a>
     </div>
   </div>
 </div>
 
 <!-- Audio Elements -->
-<audio id="welcome-audio" src="audio/welcome.mp3" preload="auto"></audio>
-<audio id="flip-audio" src="audio/flip.mp3" preload="auto"></audio>
+<audio id="welcome-audio" src="welcome.mp3" preload="auto"></audio>
+<audio id="flip-audio" src="flip.mp3" preload="auto"></audio>
 
 <!-- Script -->
 <script>
   async function loadProfile() {
-    const res = await fetch("data/profile.json");
+    const res = await fetch("profile.json");
     const data = await res.json();
 
     document.getElementById("profile-name").textContent = data.name;
     document.getElementById("profile-role").textContent = data.role;
-    document.getElementById("profile-pic").src = "images/" + data.image;
+    document.getElementById("profile-pic").src = data.image;
 
     const contactList = document.getElementById("contact-list");
     data.contacts.forEach(contact => {
@@ -210,7 +235,7 @@
 
     setTimeout(() => {
       card.classList.remove("flipped");
-    }, 6000); // 6-second auto-flip back
+    }, 6000);
   }
 
   // Particle background
