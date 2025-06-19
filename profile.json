@@ -4,15 +4,15 @@
   "image": "photo.jpg",
   "contacts": [
     {
-      "label": "Email: ambikabhi.14@gmail.com",
+      "label": "ambikabhi.14@gmail.com",
       "icon": "fas fa-envelope"
     },
     {
-      "label": "Phone: 7004292495",
+      "label": "+91 7004292495",
       "icon": "fas fa-phone"
     },
     {
-      "label": "Location: Patna, Bihar",
+      "label": "Patna, Bihar, India",
       "icon": "fas fa-map-marker-alt"
     }
   ],
