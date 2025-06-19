@@ -1,16 +1,29 @@
 {
-    "name": "Abhishek Singh",
-    "role": "web developer",
-    "image": "photo.jpg",
-    "contacts": [
-      { "icon": "fas fa-envelope", "label": "abhi@example.com" },
-        { "icon": "fas fa-phone", "label": "+91-9876543210" },
-    { "icon": "fas fa-map-marker-alt", "label": "India" }
-    ],
-    "socials": [
-       { "icon": "fab fa-github", "href": "https://github.com/abhishek15-stek7" },
-    { "icon": "fab fa-youtube", "href": "https://youtube.com/@ArtWithAbhishek" },
-    { "icon": "fab fa-instagram", "href": "https://instagram.com/crafty_abhishek" }
-    ]
-  }
-  
+  "name": "Abhishek Singh",
+  "role": "Web Developer & AI Expert",
+  "image": "photo.jpg",
+  "contacts": [
+    {
+      "label": "Email: ambikabhi.14@gmail.com",
+      "icon": "fas fa-envelope"
+    },
+    {
+      "label": "Phone: 7004292495",
+      "icon": "fas fa-phone"
+    },
+    {
+      "label": "Location: Patna, Bihar",
+      "icon": "fas fa-map-marker-alt"
+    }
+  ],
+  "socials": [
+    {
+      "href": "https://github.com/abhishek15-stek7",
+      "icon": "fab fa-github"
+    },
+    {
+      "href": "https://www.instagram.com/its_abhi_2009_/?utm_source=qr",
+      "icon": "fab fa-instagram"
+    }
+  ]
+}
