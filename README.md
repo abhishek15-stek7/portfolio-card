@@ -24,7 +24,7 @@ Welcome to my ✨ animated, AI-ready, sound-enhanced profile card. This isn't ju
 
 | 🔗 Resource                | Link |
 |---------------------------|------|
-| ✅ Live Site (Plain Link) | https://abhishek15-stek7.github.io/profilo-card/ |
+| ✅ Live Site (Plain Link) | https://abhishek15-stek7.github.io/profilo-card/](https://qr.me-qr.com/KaSgVHGm |
 | 📸 Instagram              | [@its_abhi_2009_](https://www.instagram.com/its_abhi_2009_/?utm_source=qr) |
 | 🧠 GitHub Profile         | [abhishek15-stek7](https://github.com/abhishek15-stek7) |
 | 🌍 Website Domain         | abhi.tech (via Netlify + short.io) |
