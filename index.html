@@ -3,31 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abhishek's Portfolio Card</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <title>Abhishek Singh – Portfolio Card</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(-45deg, #1e1e2f, #2c2c54, #3a3a85, #1f4068);
-      background-size: 400% 400%;
-      animation: bgMove 15s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       overflow: hidden;
-      color: #fff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      color: white;
     }
 
-    @keyframes bgMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    canvas#bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
 
     .container {
-      perspective: 1200px;
+      perspective: 1000px;
     }
 
     .card {
@@ -47,63 +50,59 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      border-radius: 20px;
       backface-visibility: hidden;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-
-    .front {
-      background: linear-gradient(135deg, #00feba, #5b548a);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 25px;
+    }
+
+    .front {
+      background: linear-gradient(135deg, #00feba, #5b548a);
       text-align: center;
     }
 
-    .front img {
-      width: 120px;
-      height: 120px;
+    .profile-img-wrapper {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 15px;
+    }
+
+    .profile-img-wrapper::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      width: 146px;
+      height: 146px;
       border-radius: 50%;
-      border: 4px solid #fff;
-      object-fit: cover;
-      box-shadow: 0 0 10px rgba(255,255,255,0.5),
-                  0 0 20px rgba(0,255,255,0.3),
-                  0 0 30px rgba(0,255,255,0.2);
-      animation: glowPulse 3s infinite ease-in-out;
+      background: conic-gradient(from 0deg, #00feba, #5b548a, #00feba);
+      animation: rotateHalo 5s linear infinite;
+      z-index: 0;
     }
 
-    @keyframes glowPulse {
-      0% {
-        box-shadow: 0 0 10px rgba(0,255,255,0.2),
-                    0 0 20px rgba(0,255,255,0.2);
-      }
-      50% {
-        box-shadow: 0 0 25px rgba(0,255,255,0.4),
-                    0 0 50px rgba(0,255,255,0.3);
-      }
-      100% {
-        box-shadow: 0 0 10px rgba(0,255,255,0.2),
-                    0 0 20px rgba(0,255,255,0.2);
-      }
+    @keyframes rotateHalo {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
-    .typewriter h2 {
-      font-size: 1.6rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 3px solid #fff;
-      width: 100%;
-      animation: blink-caret 0.75s step-end infinite;
-      margin: 15px 0;
+    .profile-img-wrapper img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid white;
+      position: relative;
+      z-index: 1;
     }
 
-    @keyframes blink-caret {
-      50% {
-        border-color: transparent;
-      }
+    .front h2 {
+      margin: 10px 0 5px;
+      font-size: 1.8rem;
     }
 
     .front p {
@@ -113,23 +112,21 @@
 
     .back {
       background: #fff;
-      color: #333;
+      color: #222;
       transform: rotateY(180deg);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-      padding: 25px;
+      justify-content: space-between;
     }
 
     .back h3 {
-      font-size: 1.5rem;
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: #5b548a;
     }
 
     .back ul {
-      padding: 0;
       list-style: none;
-      text-align: center;
+      padding: 0;
+      margin: 20px 0;
     }
 
     .back ul li {
@@ -140,10 +137,11 @@
     .social-icons {
       display: flex;
       gap: 15px;
+      margin: 10px 0;
     }
 
     .social-icons a {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       color: #5b548a;
       transition: transform 0.3s ease;
     }
@@ -155,77 +153,101 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="card" id="profile-card" onclick="flipCard()">
-      <div class="face front">
-        <img id="profile-pic" src="avatar.png" alt="Profile Picture" />
-        <div class="typewriter">
-          <h2 id="typed-text"></h2>
-        </div>
-        <p id="profile-role">Loading role...</p>
+<canvas id="bgCanvas"></canvas>
+
+<div class="container">
+  <div class="card" id="card" onclick="flipCard()">
+    <div class="face front">
+      <div class="profile-img-wrapper">
+        <img id="profile-pic" src="photo.jpg" alt="Profile Picture">
       </div>
-      <div class="face back">
-        <h3>Connect With Me</h3>
-        <ul id="contact-list"></ul>
-        <div class="social-icons" id="social-icons"></div>
-      </div>
+      <h2 id="profile-name">Loading...</h2>
+      <p id="profile-role">Loading role...</p>
+    </div>
+    <div class="face back">
+      <h3>Connect With Me</h3>
+      <ul id="contact-list"></ul>
+      <div class="social-icons" id="social-icons"></div>
     </div>
   </div>
+</div>
 
-  <!-- Audio Files -->
-  <audio id="welcome-sound" src="welcome.mp3" preload="auto"></audio>
-  <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
+<!-- Audio Elements -->
+<audio id="welcome-audio" src="audio/welcome.mp3" preload="auto"></audio>
+<audio id="flip-audio" src="audio/flip.mp3" preload="auto"></audio>
 
-  <script>
-    // Flip the card
-    function flipCard() {
-      const card = document.getElementById('profile-card');
-      card.classList.toggle('flipped');
-      document.getElementById('flip-sound').play();
-    }
+<!-- Script -->
+<script>
+  async function loadProfile() {
+    const res = await fetch("data/profile.json");
+    const data = await res.json();
 
-    // Load profile.json
-    async function loadProfile() {
-      const res = await fetch('profile.json');
-      const data = await res.json();
+    document.getElementById("profile-name").textContent = data.name;
+    document.getElementById("profile-role").textContent = data.role;
+    document.getElementById("profile-pic").src = "images/" + data.image;
 
-      document.getElementById('profile-role').textContent = data.role;
-      document.getElementById('profile-pic').src = data.image;
+    const contactList = document.getElementById("contact-list");
+    data.contacts.forEach(contact => {
+      const li = document.createElement("li");
+      li.innerHTML = `<i class="${contact.icon}"></i> ${contact.label}`;
+      contactList.appendChild(li);
+    });
 
-      const contactList = document.getElementById('contact-list');
-      data.contacts.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = `<i class="${item.icon}"></i> ${item.label}`;
-        contactList.appendChild(li);
-      });
+    const socials = document.getElementById("social-icons");
+    data.socials.forEach(social => {
+      const a = document.createElement("a");
+      a.href = social.href;
+      a.target = "_blank";
+      a.innerHTML = `<i class="${social.icon}"></i>`;
+      socials.appendChild(a);
+    });
+  }
 
-      const socials = document.getElementById('social-icons');
-      data.socials.forEach(social => {
-        const a = document.createElement('a');
-        a.href = social.href;
-        a.target = "_blank";
-        a.innerHTML = `<i class="${social.icon}"></i>`;
-        socials.appendChild(a);
-      });
+  function flipCard() {
+    const card = document.getElementById("card");
+    card.classList.toggle("flipped");
+    document.getElementById("flip-audio").play();
 
-      typeWriter(data.name); // Start typing name
-    }
+    setTimeout(() => {
+      card.classList.remove("flipped");
+    }, 6000); // 6-second auto-flip back
+  }
 
-    // Typewriter effect
-    let i = 0;
-    function typeWriter(text) {
-      const typed = document.getElementById("typed-text");
-      if (i < text.length) {
-        typed.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(() => typeWriter(text), 100);
-      }
-    }
+  // Particle background
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-    window.onload = async () => {
-      await loadProfile();
-      document.getElementById('welcome-sound').play();
-    };
-  </script>
+  let particles = [];
+  for (let i = 0; i < 100; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 1,
+      d: Math.random() * 1
+    });
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff88";
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+      ctx.fill();
+      p.y += p.d;
+      if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(drawParticles);
+  }
+
+  window.onload = async () => {
+    await loadProfile();
+    document.getElementById("welcome-audio").play();
+    drawParticles();
+  };
+</script>
 </body>
 </html>
+
