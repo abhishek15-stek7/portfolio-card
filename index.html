@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abhishek's Profile Card</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <title>Abhishek's Portfolio Card</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(-45deg, #1e1e2f, #2c2c54, #3a3a85, #1f4068);
       background-size: 400% 400%;
       animation: bgMove 15s ease infinite;
@@ -14,8 +16,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
+      overflow: hidden;
       color: #fff;
     }
 
@@ -26,16 +27,15 @@
     }
 
     .container {
-      perspective: 1500px;
+      perspective: 1200px;
     }
 
     .card {
-      width: 320px;
-      max-width: 90vw;
-      height: 440px;
+      width: 340px;
+      height: 480px;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      transition: transform 1s ease;
       cursor: pointer;
     }
 
@@ -47,10 +47,10 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      backface-visibility: hidden;
       border-radius: 20px;
+      backface-visibility: hidden;
       overflow: hidden;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
     .front {
@@ -59,21 +59,51 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 25px;
       text-align: center;
-      padding: 20px;
     }
 
     .front img {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      border: 4px solid white;
-      margin-bottom: 15px;
+      border: 4px solid #fff;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5),
+                  0 0 20px rgba(0,255,255,0.3),
+                  0 0 30px rgba(0,255,255,0.2);
+      animation: glowPulse 3s infinite ease-in-out;
     }
 
-    .front h2 {
-      font-size: 1.8rem;
-      margin-bottom: 6px;
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 10px rgba(0,255,255,0.2),
+                    0 0 20px rgba(0,255,255,0.2);
+      }
+      50% {
+        box-shadow: 0 0 25px rgba(0,255,255,0.4),
+                    0 0 50px rgba(0,255,255,0.3);
+      }
+      100% {
+        box-shadow: 0 0 10px rgba(0,255,255,0.2),
+                    0 0 20px rgba(0,255,255,0.2);
+      }
+    }
+
+    .typewriter h2 {
+      font-size: 1.6rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #fff;
+      width: 100%;
+      animation: blink-caret 0.75s step-end infinite;
+      margin: 15px 0;
+    }
+
+    @keyframes blink-caret {
+      50% {
+        border-color: transparent;
+      }
     }
 
     .front p {
@@ -82,25 +112,24 @@
     }
 
     .back {
-      background: #ffffff;
+      background: #fff;
       color: #333;
       transform: rotateY(180deg);
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: space-evenly;
+      align-items: center;
       padding: 25px;
-      text-align: center;
     }
 
     .back h3 {
       font-size: 1.5rem;
-      margin-bottom: 10px;
     }
 
     .back ul {
-      list-style: none;
       padding: 0;
+      list-style: none;
+      text-align: center;
     }
 
     .back ul li {
@@ -111,13 +140,11 @@
     .social-icons {
       display: flex;
       gap: 15px;
-      margin-top: 10px;
     }
 
     .social-icons a {
+      font-size: 1.4rem;
       color: #5b548a;
-      font-size: 1.5rem;
-      text-decoration: none;
       transition: transform 0.3s ease;
     }
 
@@ -131,9 +158,11 @@
   <div class="container">
     <div class="card" id="profile-card" onclick="flipCard()">
       <div class="face front">
-        <img id="profile-pic" src="" alt="Profile Picture">
-        <h2 id="profile-name">Loading...</h2>
-        <p id="profile-role">Please wait...</p>
+        <img id="profile-pic" src="avatar.png" alt="Profile Picture" />
+        <div class="typewriter">
+          <h2 id="typed-text"></h2>
+        </div>
+        <p id="profile-role">Loading role...</p>
       </div>
       <div class="face back">
         <h3>Connect With Me</h3>
@@ -143,41 +172,54 @@
     </div>
   </div>
 
-  <!-- Audio -->
+  <!-- Audio Files -->
   <audio id="welcome-sound" src="welcome.mp3" preload="auto"></audio>
   <audio id="flip-sound" src="flip.mp3" preload="auto"></audio>
 
-  <!-- JS -->
   <script>
-    async function loadProfile() {
-      const res = await fetch('profile.json');
-      const data = await res.json();
-
-      document.getElementById('profile-name').textContent = data.name;
-      document.getElementById('profile-role').textContent = data.role;
-      document.getElementById('profile-pic').src = data.image;
-
-      const contactList = document.getElementById('contact-list');
-      data.contacts.forEach(c => {
-        const li = document.createElement('li');
-        li.innerHTML = `<i class="${c.icon}"></i> ${c.label}`;
-        contactList.appendChild(li);
-      });
-
-      const socials = document.getElementById('social-icons');
-      data.socials.forEach(s => {
-        const a = document.createElement('a');
-        a.href = s.href;
-        a.target = '_blank';
-        a.innerHTML = `<i class="${s.icon}"></i>`;
-        socials.appendChild(a);
-      });
-    }
-
+    // Flip the card
     function flipCard() {
       const card = document.getElementById('profile-card');
       card.classList.toggle('flipped');
       document.getElementById('flip-sound').play();
+    }
+
+    // Load profile.json
+    async function loadProfile() {
+      const res = await fetch('profile.json');
+      const data = await res.json();
+
+      document.getElementById('profile-role').textContent = data.role;
+      document.getElementById('profile-pic').src = data.image;
+
+      const contactList = document.getElementById('contact-list');
+      data.contacts.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<i class="${item.icon}"></i> ${item.label}`;
+        contactList.appendChild(li);
+      });
+
+      const socials = document.getElementById('social-icons');
+      data.socials.forEach(social => {
+        const a = document.createElement('a');
+        a.href = social.href;
+        a.target = "_blank";
+        a.innerHTML = `<i class="${social.icon}"></i>`;
+        socials.appendChild(a);
+      });
+
+      typeWriter(data.name); // Start typing name
+    }
+
+    // Typewriter effect
+    let i = 0;
+    function typeWriter(text) {
+      const typed = document.getElementById("typed-text");
+      if (i < text.length) {
+        typed.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(() => typeWriter(text), 100);
+      }
     }
 
     window.onload = async () => {
