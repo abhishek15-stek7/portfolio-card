@@ -37,7 +37,7 @@ Welcome to my ✨ animated, AI-ready, sound-enhanced profile card. This isn't ju
 
 Just scan this QR code on any device to directly visit the site:
 
-![QR Code to Portfolio](https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://abhishek15-stek7.github.io/profilo-card/)
+![QR Code to Portfolio](qr.png)
 
 ---
 
