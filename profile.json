@@ -4,13 +4,13 @@
     "image": "photo.jpg",
     "contacts": [
       { "icon": "fas fa-envelope", "label": "abhi@example.com" },
-      { "icon": "fab fa-youtube", "label": "webdevelopmentWithAbhishek" },
-      { "icon": "fab fa-instagram", "label": "itz_abhishek_2009" }
+        { "icon": "fas fa-phone", "label": "+91-9876543210" },
+    { "icon": "fas fa-map-marker-alt", "label": "India" }
     ],
     "socials": [
-      { "href": "https://youtube.com", "icon": "fab fa-youtube" },
-      { "href": "https://instagram.com", "icon": "fab fa-instagram" },
-      { "href": "mailto:abhi@example.com", "icon": "fas fa-envelope" }
+       { "icon": "fab fa-github", "href": "https://github.com/abhishek15-stek7" },
+    { "icon": "fab fa-youtube", "href": "https://youtube.com/@ArtWithAbhishek" },
+    { "icon": "fab fa-instagram", "href": "https://instagram.com/crafty_abhishek" }
     ]
   }
   
