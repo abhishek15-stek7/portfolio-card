@@ -1,0 +1,16 @@
+{
+    "name": "Abhishek Singh",
+    "role": "Art & Craft YouTuber",
+    "image": "https://i.imgur.com/Nz9ZLAj.png",
+    "contacts": [
+      { "icon": "fas fa-envelope", "label": "abhi@example.com" },
+      { "icon": "fab fa-youtube", "label": "@ArtWithAbhishek" },
+      { "icon": "fab fa-instagram", "label": "@crafty_abhishek" }
+    ],
+    "socials": [
+      { "href": "https://youtube.com", "icon": "fab fa-youtube" },
+      { "href": "https://instagram.com", "icon": "fab fa-instagram" },
+      { "href": "mailto:abhi@example.com", "icon": "fas fa-envelope" }
+    ]
+  }
+  
