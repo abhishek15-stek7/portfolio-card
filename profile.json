@@ -1,11 +1,11 @@
 {
     "name": "Abhishek Singh",
-    "role": "Art & Craft YouTuber",
+    "role": "web developer",
     "image": "photo.jpg",
     "contacts": [
       { "icon": "fas fa-envelope", "label": "abhi@example.com" },
-      { "icon": "fab fa-youtube", "label": "@ArtWithAbhishek" },
-      { "icon": "fab fa-instagram", "label": "@crafty_abhishek" }
+      { "icon": "fab fa-youtube", "label": "webdevelopmentWithAbhishek" },
+      { "icon": "fab fa-instagram", "label": "itz_abhishek_2009" }
     ],
     "socials": [
       { "href": "https://youtube.com", "icon": "fab fa-youtube" },
