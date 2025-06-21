@@ -167,8 +167,7 @@
   <div class="card" id="card" onclick="flipCard()">
     <div class="face front">
       <div class="profile-img-wrapper">
-      <img id="profile-pic" src="images/photo.jpg" alt="Profile Picture" onerror="this.src='images/photo.jpg'">
-
+        <img id="profile-pic" src="photo.jpg" alt="Profile Picture" onerror="this.src='photo.jpg'">
       </div>
       <h2 id="profile-name">Loading...</h2>
       <p id="profile-role">Loading role...</p>
@@ -182,44 +181,48 @@
 </div>
 
 <!-- Audio Elements -->
-<audio id="welcome-audio" src="audio/welcome.mp3" preload="auto"></audio>
-<audio id="flip-audio" src="audio/flip.mp3" preload="auto"></audio>
-<audio id="hover-sound" src="audio/hover.mp3" preload="auto"></audio>
+<audio id="welcome-audio" src="welcome.mp3" preload="auto"></audio>
+<audio id="flip-audio" src="flip.mp3" preload="auto"></audio>
+<audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
 
 <script>
   async function loadProfile() {
-    const res = await fetch("profile.json");
-    const data = await res.json();
+    try {
+      const res = await fetch("./profile.json");
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+      const data = await res.json();
 
-    document.getElementById("profile-name").textContent = data.name;
-    document.getElementById("profile-role").textContent = data.role;
-    document.getElementById("profile-pic").src = data.image;
+      document.getElementById("profile-name").textContent = data.name;
+      document.getElementById("profile-role").textContent = data.role;
+      document.getElementById("profile-pic").src = data.image;
 
-    const contactList = document.getElementById("contact-list");
-    data.contacts.forEach(contact => {
-      const li = document.createElement("li");
-      li.innerHTML = `<i class="${contact.icon}"></i> ${contact.label}`;
-      contactList.appendChild(li);
-    });
-
-    const socials = document.getElementById("social-icons");
-    data.socials.forEach(social => {
-      const a = document.createElement("a");
-      a.href = social.href;
-      a.target = "_blank";
-      a.innerHTML = `<i class="${social.icon}"></i>`;
-      a.addEventListener("mouseenter", () => {
-        document.getElementById("hover-sound").play();
+      const contactList = document.getElementById("contact-list");
+      data.contacts.forEach(contact => {
+        const li = document.createElement("li");
+        li.innerHTML = `<i class="${contact.icon}"></i> ${contact.label}`;
+        contactList.appendChild(li);
       });
-      socials.appendChild(a);
-    });
+
+      const socials = document.getElementById("social-icons");
+      data.socials.forEach(social => {
+        const a = document.createElement("a");
+        a.href = social.href;
+        a.target = "_blank";
+        a.innerHTML = `<i class="${social.icon}"></i>`;
+        a.addEventListener("mouseenter", () => {
+          document.getElementById("hover-sound").play();
+        });
+        socials.appendChild(a);
+      });
+    } catch (err) {
+      console.error("❌ Failed to load profile.json:", err);
+    }
   }
 
   function flipCard() {
     const card = document.getElementById("card");
     card.classList.toggle("flipped");
     document.getElementById("flip-audio").play();
-
     setTimeout(() => {
       card.classList.remove("flipped");
     }, 6000);
